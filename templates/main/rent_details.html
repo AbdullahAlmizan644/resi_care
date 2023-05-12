@@ -1,0 +1,246 @@
+{% extends "main/base.html"%}
+{% block title %} Rent Details{% endblock %}
+{% load static %}
+{% block content %}
+
+<!-- Blog Hero Section Begin -->
+<section class="blog-hero-section set-bg" data-setbg="{{ post.home_image_one.url }}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bh-text">
+                    <h4>{{ post.title }}</h4>
+                    <ul>
+                        <li>by <span>{{ post.creator }}</span></li>
+                        <li>{{ post.datetime}}</li>
+                        <!-- <li>12 Comment</li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Hero Section End -->
+
+<!-- Blog Details Section Begin -->
+<section class="blog-details-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 m-auto p-0">
+                <div class="blog-details-content">
+                    <div class="bc-top">
+                        <ul>
+                            <!-- <li><i class="fa fa-object-group"></i>{{post.total_square_feet}}</li> -->
+                            <li><i class="fa fa-bathtub"></i> {{ post.total_washroom }}</li>
+                            <li><i class="fa fa-bed"></i> {{ post.total_bed }}</li>
+                            <!-- <li><i class="fa fa-automobile"></i> 01</li> -->
+                        </ul>
+                    </div>
+                    <div class="bc-details">
+                        <div class="bc-pic">
+                            <img src="{{ post.home_image_one.url }}" alt="">
+                        </div>
+                        <div class="bc-pic">
+                            <img src="{{ post.home_image_two.url }}" alt="">
+                        </div>
+                        <div class="bc-pic">
+                            <img src="{{ post.home_image_three.url }}" alt="">
+                        </div>
+                        <!-- <div class="bc-text">
+                            <p>{{ post.home_description }}</p>
+                        </div> -->
+
+                        <p>{{ post.home_description }}</p>
+                        
+                    </div>
+
+                    {% if post.flag == "y" %}
+                    <button class="site-btn my-2">Rent already Taken</button>
+                    {% else %}
+                    <a href="{% url "take_rent" post.id %}"><button class="site-btn my-2">Take Rent Service</button></a>
+                    {% endif %}
+                    <br><br>
+
+                    
+
+                    
+
+                    <!-- <div>
+                        <img src="{{ post.home_image_two.url }}" alt="">
+                    </div> -->
+
+                    
+       
+              
+                    <!-- <div class="bc-related-post">
+                        <a href="#" class="previous-post"><i class="fa fa-angle-left"></i> Previous posts</a>
+                        <a href="#" class="next-post">Next posts <i class="fa fa-angle-right"></i></a>
+                    </div>
+                    <div class="bc-widget">
+                        <h4>Related posts</h4>
+                        <div class="related-post">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="related-item">
+                                        <div class="ri-pic">
+                                            <img src="img/blog/related-post-1.jpg" alt="">
+                                        </div>
+                                        <div class="ri-text">
+                                            <h6>what3words: The app changin real estate and construc...</h6>
+                                            <span>Seb 24, 2019</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="related-item">
+                                        <div class="ri-pic">
+                                            <img src="img/blog/related-post-2.jpg" alt="">
+                                        </div>
+                                        <div class="ri-text">
+                                            <h6>what3words: The app changin real estate and construc...</h6>
+                                            <span>Seb 24, 2019</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="related-item">
+                                        <div class="ri-pic">
+                                            <img src="img/blog/related-post-3.jpg" alt="">
+                                        </div>
+                                        <div class="ri-text">
+                                            <h6>what3words: The app changin real estate and construc...</h6>
+                                            <span>Seb 24, 2019</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="bc-widget">
+                        <h4>{{total_comments}} Comment</h4>
+                        
+                        {% for comment in all_comments %}
+                        <div class="comment-option">
+                            <div class="co-item">
+                                <div class="ci-text">
+                                    <h5>{{ comment.username }}</h5>
+                                    <p>{{ comment.comment}}.</p>
+                                    <ul>
+                                        <li><i class="fa fa-clock-o"></i>{{ comment.datetime }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+                    </div>
+                    <div class="bc-widget">
+                        <h4>Leave a comment</h4>
+                        <form action={% url "rent_details" post.id %} method="post" class="leave-comment-form">
+                            {% csrf_token %}
+                            <!-- <div class="group-input">
+                                <input type="text" placeholder="Name">
+                                <input type="text" placeholder="Email">
+                                <input type="text" placeholder="Website">
+                            </div> -->
+                            <textarea placeholder="Comment" name="comment"></textarea>
+                            <button type="submit" class="site-btn">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Details Section End -->
+
+<!-- Contact Section Begin -->
+<section class="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="contact-info">
+                    <div class="ci-item">
+                        <div class="ci-icon">
+                            <i class="fa fa-map-marker"></i>
+                        </div>
+                        <div class="ci-text">
+                            <h5>Address</h5>
+                            <p>{{ post.district }},{{ post.division }}</p>
+                        </div>
+                    </div>
+                    <div class="ci-item">
+                        <div class="ci-icon">
+                            <i class="fa fa-mobile"></i>
+                        </div>
+                        <div class="ci-text">
+                            <h5>Phone</h5>
+                            <ul>
+                                <li>{{ post.phone_number }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- <div class="ci-item">
+                        <div class="ci-icon">
+                            <i class="fa fa-headphones"></i>
+                        </div>
+                        <div class="ci-text">
+                            <h5>Support</h5>
+                            <p>{{ post.email }}</p>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="cs-map">
+        <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d735515.5813275519!2d-80.41163541934742!3d43.93644386501528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882a55bbf3de23d7%3A0x3ada5af229b47375!2sMono%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sbd!4v1583262687289!5m2!1sen!2sbd"
+                height="450" style="border:0;" allowfullscreen=""></iframe> 
+    </div> -->
+
+
+
+</section>
+<!-- Contact Section End -->
+
+<div id="map">
+    <iframe src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMQgZvqzCVG0FFT5RsE59wjEYzQLncahI&libraries=places" frameborder="0"></iframe>
+</div>
+
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMQgZvqzCVG0FFT5RsE59wjEYzQLncahI&callback=initMap" async defer></script> -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMQgZvqzCVG0FFT5RsE59wjEYzQLncahI&libraries=places"></script>
+<!-- <script>
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 0, lng: 0},
+            zoom: 2
+        });
+
+            var marker = new google.maps.Marker({
+                position: {lat: {{ post.latitude }}, lng: {{ post.longitude }} },
+                map: map,
+                title: '{{ post.title }}'
+            });
+
+    }
+</script> -->
+
+<script>
+    function initMap() {
+      // Create a new map instance
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 37.7749, lng: -122.4194 }, // Set the initial center of the map
+        zoom: 12 // Set the initial zoom level
+      });
+    }
+  </script>
+
+<script>
+    // Load the map when the page has finished loading
+    window.onload = function() {
+      initMap();
+    };
+  </script>
+
+{% endblock %}

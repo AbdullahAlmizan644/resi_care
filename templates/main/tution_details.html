@@ -1,0 +1,39 @@
+{% extends "main/base.html"%}
+{% block title %} Tution Details{% endblock %}
+{% load static %}
+{% block content %}
+
+
+
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-8">
+        <img src="{{post.tution_image.url}}" class="img-fluid mb-4" alt="Post Title">
+        <h1 class="mt-4">{{post.title}}</h1>
+        <p class="text-muted">Posted on {{post.datetime}} by {{post.creator}}</p>
+        <hr>
+      
+        <p>{{post.teacher_details}}</p>
+      </div>
+      <div class="col-md-4">
+        <h4 class="my-3">Tution contact :</h4>
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Gurdian Phone
+            <span class="badge badge-primary badge-pill">{{post.phone_number}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Gurdian Emails
+            <span class="badge badge-primary badge-pill">{{ post.email }}</span>
+          </li>
+
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Tution Address
+            <span class="badge badge-primary badge-pill">{{post.division}},{{post.district}},{{ post.address_details }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

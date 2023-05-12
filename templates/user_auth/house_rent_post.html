@@ -1,0 +1,84 @@
+{% extends "user_auth/base_user_dashboard.html" %}
+{% load static %}
+{% block content %}
+{% block head %}
+<style>
+    label{
+        display: block;
+        font-weight: bolder;
+        font-size: 25px;
+        color: lightcoral;
+        
+    }
+    input{
+        display: block;
+        width: 40vw;
+        margin: 10px;
+        height: 50px;
+        font-weight: bolder;
+        color: black;
+        
+    }
+
+    textarea{
+        width: 40vw;
+    }
+
+    select{
+        display: block;
+        width: 40vw;
+        margin: 10px;
+        height: 50px;
+
+    }
+</style>
+{% endblock %}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Add House Rent Post</h1>
+    <p class="mb-4">If you have any house for rent you can give rent post.</p>
+    
+
+    <div class="container">
+        <form method="post" action="{% url 'house_rent_post' %}" id="rent" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            
+            <button class="btn btn-lg btn-primary" type="submit" form="rent">Upload</button>
+        </form>
+    </div>
+
+
+
+</div>
+<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var divisionField = $('#id_division');
+        var districtField = $('#id_district');
+        var districtOptions = districtField.html();
+
+        divisionField.change(function () {
+            var selectedCity = divisionField.val();
+            var newOptions = districtOptions;
+
+            if (selectedCity == 'Dhaka') {
+                newOptions = '<option value="Mirpur">Mirpur</option><option value="Gulshan">Gulshan</option>';
+            } else if (selectedCity == 'Chittagong') {
+                newOptions = '<option value=Gec Moor">Gec Moor</option><option value="Chawkbazar">Chawkbazar</option>';
+            }
+
+            districtField.html(newOptions);
+        });
+    });
+</script>
+
+{% endblock %}

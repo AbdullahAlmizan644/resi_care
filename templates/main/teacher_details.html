@@ -1,0 +1,49 @@
+{% extends "main/base.html"%}
+{% block title %} Teacher Details {% endblock %}
+{% load static %}
+{% block content %}
+
+  <div class="container my-3">
+    <div class="row">
+      <div class="col-md-4">
+        <img src="{{post.teacher_image.url}}" class="img-fluid" alt="John Doe">
+      </div>
+      <div class="col-md-8">
+        <h1>{{post.teacher_name}}</h1>
+        <h2>Teacher</h2>
+        <p>{{post.educations_details}}</p>
+        <hr>
+        <h2>Contact Information</h2>
+        <ul class="list-group">
+          <li class="list-group-item">Email: {{post.email}}</li>
+          <li class="list-group-item">Phone: {{post.phone_number}}</li>
+          <li class="list-group-item">Address: {{post.division}},{{post.district}},{{post.details_address}}</li>
+          <li class="list-group-item">Rating: {{post.rating}}</li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <br><br><br>
+  <div class="container">
+    <h6>If you know the teacher give a rating between 1-5</h6>
+    <div class="row">
+      <div class="col-md-6">
+        <form action={% url "teacher_details" post.id %} method="post" >
+          {% csrf_token %}
+          <h4>Rating:</h4>
+        <input type="number" min="1" max="5" name="rating" required>
+        <!-- <h4>Review:</h4>
+        <textarea class="form-control" rows="5" id="reviewTextarea"></textarea> -->
+        <button type="submit">send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+
+{% endblock %}
