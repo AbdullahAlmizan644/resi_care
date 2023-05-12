@@ -49,13 +49,11 @@
                         <!-- <div class="bc-text">
                             <p>{{ post.home_description }}</p>
                         </div> -->
-
                         <p>{{ post.home_description }}</p>
-                        
                     </div>
 
                     {% if post.flag == "y" %}
-                    <button class="site-btn my-2">Rent already Taken</button>
+                    <button class="site-btn my-2">Not Available</button>
                     {% else %}
                     <a href="{% url "take_rent" post.id %}"><button class="site-btn my-2">Take Rent Service</button></a>
                     {% endif %}
