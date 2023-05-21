@@ -103,7 +103,7 @@ def teacher_details(request,id):
     if request.method=="POST":
         rating=request.POST.get("rating")
         teacher = Teacher.objects.get(id=id)
-        teacher.rating=rating
+        teacher.rating=float(rating)
         teacher.save()
         print(teacher.rating)
         messages.success(request, "rating add successfully!")
